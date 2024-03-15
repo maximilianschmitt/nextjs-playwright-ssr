@@ -1,6 +1,20 @@
-import { test, expect } from '@playwright/test'
+import { test, expect } from 'playwright-ssr'
 
-test('displays latest repos from GitHub', async ({ page }) => {
+test('displays latest repos from GitHub', async ({ page, webServer }) => {
+	await webServer.route('**/*', async (route) => {
+		console.log('>>>>>>>>>>>>>>> hello request')
+		console.log(route.request().method(), route.request().url())
+		await route.continue()
+		// await route.fulfill({
+		// 	status: 200,
+		// 	json: [
+		// 		{ id: 1, full_name: 'maximilianschmitt/hello-world' },
+		// 		{ id: 2, full_name: 'maximilianschmitt/maxschmitt.me' },
+		// 		{ id: 3, full_name: 'maximilianschmitt/cakedesk' },
+		// 	],
+		// })
+	})
+
 	await page.goto('/')
 
 	// Check that the correct title is displayed
