@@ -1,7 +1,7 @@
 export default async function Home() {
-	const repos = await fetch('https://api.github.com/users/maximilianschmitt/repos?sort=updated')
-		.then((res) => res.json())
-		.then((repos) => repos.slice(0, 3))
+	const repos = await fetch('https://api.github.com/users/maximilianschmitt/repos?sort=updated', {
+		cache: 'no-cache',
+	}).then((res) => (res.ok ? res.json().then((repos) => repos.slice(0, 3)) : []))
 
 	return (
 		<main className="p-4">

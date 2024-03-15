@@ -1,15 +1,10 @@
 import { defineConfig, devices } from '@playwright/test'
 import { WorkerConfigOptions } from 'playwright-ssr'
 
-/**
- * See https://playwright.dev/docs/test-configuration.
- */
 export default defineConfig<WorkerConfigOptions>({
-	testDir: '.',
 	testMatch: '**/*.test.ts',
 	use: {
 		baseURL: 'http://127.0.0.1:3000',
-		trace: 'on-first-retry',
 	},
 	projects: [
 		{
